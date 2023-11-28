@@ -1,10 +1,10 @@
 # Backend-Project-Module3-Pets
 
-Project Name: Pet Savior;
+Project Name: Upet;
 
 
 Quick Compo: 'Your Pet Digital Id';
-
+s
 
 Description: Pets app that has all the info about your pets in one single application.;
 
