@@ -2,65 +2,69 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-/* Configure an Express Router for the Project Routes */
+/* Configure an Express Router for the Dog Routes */
 const router = express.Router();
 
-/* Require the Project Model */
-const Project = require("../models/Project.model");
+/* Require the Dog Model */
+const Dog = require("../models/Dog.model.js");
 
 /* ROUTES */
 
-// POST '/api/project' - Creates a new proejct
+// POST '/api/pets' - Creates a new pet (Dog).
 router.post("/api/pets", (req, res) => {
-  const { title, description } = req.body;
+  const { name, image, age, breed, hairType, chipId, sex, size, weight,
+    description, diet, medicalRecord } = req.body;
 
-  Project.create({ title, description, tasks: [] })
+  Dog.create({ name, image, age, breed, hairType, chipId, sex, size, weight,
+    description, diet, medicalRecord, owner: [] })
     .then((response) => res.json(response))
     .catch((error) => res.json(error));
 });
 
-// GET '/api/projects' - Reads all projects
-router.get("/projects", (req, res) => {
-  Project.find()
-    .populate('tasks')
-    .then((allProjects) => res.json(allProjects))
+// GET '/api/projects' - Reads all dogs.
+router.get("/api/pets", (req, res) => {
+  Dog.find()
+    .populate('owner')
+    .then((allDogs) => res.json(allDogs))
     .catch((error) => res.json(error));
 });
 
-// GET '/api/projects/:projectId' - Reads a specific project
-router.get("/projects/:projectId", (req, res) => {
-  const { projectId } = req.params;
-  Project.findById(projectId)
-    .populate('tasks')
-    .then((project) => res.json(project))
+// GET '/api/pets/:dogId' - Reads a specific dog.
+router.get("/api/pets/:dogId", (req, res) => {
+  const { dogId } = req.params;
+  Dog.findById(dogId)
+    .populate('owner')
+    .then((dog) => res.json(dog))
     .catch((error) => res.json(error));
 });
 
-// PUT '/api/projects/:projectId' - Updates a specific project
-router.put("/projects/:projectId", (req, res) => {
+// PUT '/api/pets/:dogId' - Updates a specific dog.
+router.put("/api/pets/:dogId", (req, res) => {
   // Object destructuring
-  const { projectId } = req.params;
-  const { title, description } = req.body;
+  const { dogId } = req.params;
+  const { name, image, age, breed, hairType, chipId, sex, size, weight,
+    description, diet, medicalRecord } = req.body;
 
-  Project.findByIdAndUpdate(projectId, { title, description }, { new: true })
+  Dog.findByIdAndUpdate(dogId, { name, image, age, breed, hairType, chipId, sex, size, weight,
+    description, diet, medicalRecord }, { new: true })
     .then(() => {
-      res.json({ message: "Project Updated!" });
+      res.json({ message: "Your dog info was Updated!" });
     })
     .catch((error) => {
-      res.json({ message: "Failed to Update Project." });
+      res.json({ message: "Failed to Update dog's info." });
     });
 });
 
-// DELETE '/api/projects/:projectId' - Deletes a specific project
-router.delete('/projects/:projectId', (req,res)=>{
-    const {projectId} = req.params; 
+// DELETE '/api/pets/:dogId' - Deletes a specific dog pet.
+router.delete('/api/pets/:dogId', (req,res)=>{
+    const {dogId} = req.params; 
 
-    Project.findByIdAndDelete(projectId)
+    Dog.findByIdAndDelete(dogId)
         .then(()=>{
-            res.json({message: 'Project deleted'});
+            res.json({message: 'Your pet dog was deleted.'});
         })
         .catch(()=>{
-            res.json({error: 'Failed to delete a Project'});
+            res.json({error: 'Failed to delete pet dog.'});
         })
 })
 

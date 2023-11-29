@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {Schema, model} = mongoose; 
 
-const catSchema = new Schema({
+const otherPetSchema = new Schema({
     name: { type: String, required: true },
     image: { type: String },
     age: { type: String, required: true }, // Data type is String isntead of Number to cover the cases where animals areless than 1 year old (ex: 4 Months old)
@@ -15,4 +15,4 @@ const catSchema = new Schema({
     owner: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
-module.exports = model("Cat", catSchema);
+module.exports = model("OtherPet", otherPetSchema);

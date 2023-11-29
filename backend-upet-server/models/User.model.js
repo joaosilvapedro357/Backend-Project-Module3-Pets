@@ -9,14 +9,14 @@ const userSchema = new Schema(
     phoneNumber: { type: String, required: true, unique: true },
     country: { type: String, required: true },
     city: { type: String, required: true },
-    adress: { type: String, required: true },
+    address: { type: String, required: true },
     numberOfPets: { type: Number }
     
-  },
-  {
+  }
+  /*{
     // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
-  }
+  }*/
 );
 
 const User = model("User", userSchema);
