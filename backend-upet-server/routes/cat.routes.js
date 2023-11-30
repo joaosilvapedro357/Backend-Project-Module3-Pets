@@ -18,7 +18,7 @@ router.post("/api/pets", (req, res) => {
   Cat.create({ name, image, age, breed, chipId, sex, size, weight,
     description, diet, medicalRecord, owner: [] })
     .then((response) => res.json(response))
-    .catch((error) => res.json(error));
+    .catch((error) => res.status(500).json({ error: 'Internal Server Error' }));
 });
 
 // GET '/api/pets' - Reads all cats.

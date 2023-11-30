@@ -6,17 +6,17 @@ const mongoose = require("mongoose");
 const router = express.Router();
 
 /* Require the Dog Model */
-const Dog = require("../models/Dog.model.js");
+const Dog = require("../models/Dog.model");
 
 /* ROUTES */
 
-// POST '/api/pets' - Creates a new pet (Dog).
-router.post("/api/pets", (req, res) => {
+// POST '/api/pet' - Creates a new pet (Dog).
+router.post("/pet", (req, res) => {
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
     description, diet, medicalRecord } = req.body;
 
   Dog.create({ name, image, age, breed, hairType, chipId, sex, size, weight,
-    description, diet, medicalRecord, owner: [] })
+    description, diet, medicalRecord, owner:[]})
     .then((response) => res.json(response))
     .catch((error) => res.json(error));
 });
