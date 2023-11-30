@@ -24,6 +24,12 @@ app.use("/auth", authRoutes);
 const dogRoutes = require('./routes/dog.routes');
 app.use('/api', dogRoutes)
 
+const catRoutes = require('./routes/cat.routes');
+app.use('/api', catRoutes)
+
+const otherPetRoutes = require('./routes/otherPet.routes');
+app.use('/api', otherPetRoutes)
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
