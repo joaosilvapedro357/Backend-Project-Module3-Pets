@@ -10,8 +10,8 @@ const OtherPet = require("../models/OtherPet.model.js");
 
 /* ROUTES */
 
-// POST '/api/pets' - Creates a new pet (OtherPet).
-router.post("/api/pets", (req, res) => {
+// POST 'pet' - Creates a new Otherpet
+router.post("/otherpet", (req, res) => {
   const { name, image, age, breed, chipId, sex, weight,
     description, diet, medicalRecord } = req.body;
 
@@ -21,16 +21,16 @@ router.post("/api/pets", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// GET '/api/pets' - Reads all pets (other than dogs or cats).
-router.get("/api/pets", (req, res) => {
+// GET 'pets' - Reads all otherPets
+router.get("/otherpets", (req, res) => {
   OtherPet.find()
     .populate('owner')
     .then((allOtherPets) => res.json(allOtherPets))
     .catch((error) => res.json(error));
 });
 
-// GET '/api/pets/:otherPetId' - Reads a specific pet (other than dogs or cats).
-router.get("/api/pets/:otherPetId", (req, res) => {
+// GET 'pets/:otherPetId' - Reads a specific otherPet
+router.get("/otherpets/:otherPetId", (req, res) => {
   const { otherPetId } = req.params;
   OtherPet.findById(otherPetId)
     .populate('owner')
@@ -38,8 +38,8 @@ router.get("/api/pets/:otherPetId", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// PUT '/api/pets/:otherPetId' - Updates a specific pet (other than dogs or cats).
-router.put("/api/pets/:otherPetId", (req, res) => {
+// PUT 'pets/:otherPetId' - Updates a specific otherPet
+router.put("/otherpets/:otherPetId", (req, res) => {
   // Object destructuring
   const { otherPetId } = req.params;
   const { name, image, age, breed, chipId, sex, weight,
@@ -55,8 +55,8 @@ router.put("/api/pets/:otherPetId", (req, res) => {
     });
 });
 
-// DELETE '/api/pets/:otherPetId' - Deletes a specific pet (other than dogs or cats).
-router.delete('/api/pets/:otherPetId', (req,res)=>{
+// DELETE 'pets/:otherPetId' - Deletes a specific otherPet
+router.delete('/otherpets/:otherPetId', (req,res)=>{
     const {otherPetId} = req.params; 
 
     OtherPet.findByIdAndDelete(otherPetId)

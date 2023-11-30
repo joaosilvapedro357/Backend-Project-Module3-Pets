@@ -12,7 +12,7 @@ const otherPetSchema = new Schema({
     description: { type: String, required: true },
     diet: { type: String },
     medicalRecord: { type: String, required: true },
-    owner: {type: Schema.Types.ObjectId, ref: 'User'}
+    owner: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
 module.exports = model("OtherPet", otherPetSchema);

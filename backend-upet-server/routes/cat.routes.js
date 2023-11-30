@@ -10,8 +10,8 @@ const Cat = require("../models/Cat.model.js");
 
 /* ROUTES */
 
-// POST '/api/pets' - Creates a new pet (Cat).
-router.post("/api/pets", (req, res) => {
+// POST '/api/cat' - Creates a new Cat.
+router.post("/cat", (req, res) => {
   const { name, image, age, breed, chipId, sex, size, weight,
     description, diet, medicalRecord } = req.body;
 
@@ -21,16 +21,16 @@ router.post("/api/pets", (req, res) => {
     .catch((error) => res.status(500).json({ error: 'Internal Server Error' }));
 });
 
-// GET '/api/pets' - Reads all cats.
-router.get("/api/pets", (req, res) => {
+// GET 'pets' - Reads all cats
+router.get("/cats", (req, res) => {
   Cat.find()
     .populate('owner')
     .then((allCats) => res.json(allCats))
     .catch((error) => res.json(error));
 });
 
-// GET '/api/pets/:catId' - Reads a specific cat.
-router.get("/api/pets/:catId", (req, res) => {
+// GET 'pets/:catId' - Reads a specific cat.
+router.get("/cats/:catId", (req, res) => {
   const { catId } = req.params;
   Cat.findById(catId)
     .populate('owner')
@@ -38,8 +38,8 @@ router.get("/api/pets/:catId", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// PUT '/api/pets/:catId' - Updates a specific cat.
-router.put("/api/pets/:catId", (req, res) => {
+// PUT 'pets/:catId' - Updates a specific cat.
+router.put("/cats/:catId", (req, res) => {
   // Object destructuring
   const { catId } = req.params;
   const { name, image, age, breed, chipId, sex, size, weight,
@@ -55,8 +55,8 @@ router.put("/api/pets/:catId", (req, res) => {
     });
 });
 
-// DELETE '/api/pets/:catId' - Deletes a specific cat pet.
-router.delete('/api/pets/:catId', (req,res)=>{
+// DELETE 'pets/:catId' - Deletes a specific cat 
+router.delete('/cats/:catId', (req,res)=>{
     const {catId} = req.params; 
 
     Cat.findByIdAndDelete(catId)

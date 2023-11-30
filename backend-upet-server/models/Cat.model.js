@@ -13,7 +13,7 @@ const catSchema = new Schema({
     description: { type: String, required: true },
     diet: { type: String, required: true },
     medicalRecord: { type: String, required: true },
-    owner: {type: Schema.Types.ObjectId, ref: 'User'}
+    owner: [{type: Schema.Types.ObjectId, ref: 'User'}]
 
 });
 

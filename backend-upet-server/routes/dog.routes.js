@@ -10,8 +10,8 @@ const Dog = require("../models/Dog.model");
 
 /* ROUTES */
 
-// POST '/api/pet' - Creates a new pet (Dog).
-router.post("/pet", (req, res) => {
+// POST '/api/dog' - Creates a new Dog
+router.post("/dog", (req, res) => {
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
     description, diet, medicalRecord } = req.body;
 
@@ -21,16 +21,16 @@ router.post("/pet", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// GET '/api/projects' - Reads all dogs.
-router.get("/api/pets", (req, res) => {
+// GET '/pets' - Reads all dogs
+router.get("/pets", (req, res) => {
   Dog.find()
     .populate('owner')
     .then((allDogs) => res.json(allDogs))
     .catch((error) => res.json(error));
 });
 
-// GET '/api/pets/:dogId' - Reads a specific dog.
-router.get("/api/pets/:dogId", (req, res) => {
+// GET 'pets/:dogId' - Reads a specific Dog
+router.get("/pets/:dogId", (req, res) => {
   const { dogId } = req.params;
   Dog.findById(dogId)
     .populate('owner')
@@ -38,8 +38,8 @@ router.get("/api/pets/:dogId", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// PUT '/api/pets/:dogId' - Updates a specific dog.
-router.put("/api/pets/:dogId", (req, res) => {
+// PUT 'pets/:dogId' - Updates a specific Dog
+router.put("/pets/:dogId", (req, res) => {
   // Object destructuring
   const { dogId } = req.params;
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
@@ -55,8 +55,8 @@ router.put("/api/pets/:dogId", (req, res) => {
     });
 });
 
-// DELETE '/api/pets/:dogId' - Deletes a specific dog pet.
-router.delete('/api/pets/:dogId', (req,res)=>{
+// DELETE 'pets/:dogId' - Deletes a specific Dog.
+router.delete('/pets/:dogId', (req,res)=>{
     const {dogId} = req.params; 
 
     Dog.findByIdAndDelete(dogId)
