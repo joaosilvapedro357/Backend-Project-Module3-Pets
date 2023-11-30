@@ -24,7 +24,7 @@ router.post("/cat", (req, res) => {
 // GET 'pets' - Reads all cats
 router.get("/cats", (req, res) => {
   Cat.find()
-    .populate('owner')
+    .populate("owner")
     .then((allCats) => res.json(allCats))
     .catch((error) => res.json(error));
 });

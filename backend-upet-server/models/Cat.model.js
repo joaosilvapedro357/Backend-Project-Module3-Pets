@@ -14,7 +14,6 @@ const catSchema = new Schema({
     diet: { type: String, required: true },
     medicalRecord: { type: String, required: true },
     owner: [{type: Schema.Types.ObjectId, ref: 'User'}]
-
 });
 
 module.exports = model("Cat", catSchema);

@@ -22,7 +22,7 @@ router.post("/dog", (req, res) => {
 });
 
 // GET '/pets' - Reads all dogs
-router.get("/pets", (req, res) => {
+router.get("/dogs", (req, res) => {
   Dog.find()
     .populate('owner')
     .then((allDogs) => res.json(allDogs))
@@ -30,7 +30,7 @@ router.get("/pets", (req, res) => {
 });
 
 // GET 'pets/:dogId' - Reads a specific Dog
-router.get("/pets/:dogId", (req, res) => {
+router.get("/dogs/:dogId", (req, res) => {
   const { dogId } = req.params;
   Dog.findById(dogId)
     .populate('owner')
@@ -39,7 +39,7 @@ router.get("/pets/:dogId", (req, res) => {
 });
 
 // PUT 'pets/:dogId' - Updates a specific Dog
-router.put("/pets/:dogId", (req, res) => {
+router.put("/dogs/:dogId", (req, res) => {
   // Object destructuring
   const { dogId } = req.params;
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
@@ -56,7 +56,7 @@ router.put("/pets/:dogId", (req, res) => {
 });
 
 // DELETE 'pets/:dogId' - Deletes a specific Dog.
-router.delete('/pets/:dogId', (req,res)=>{
+router.delete('/dogs/:dogId', (req,res)=>{
     const {dogId} = req.params; 
 
     Dog.findByIdAndDelete(dogId)
