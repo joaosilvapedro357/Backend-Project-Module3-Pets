@@ -45,8 +45,8 @@ router.put("/dogs/:dogId", (req, res) => {
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
     description, diet, medicalRecord } = req.body;
 
-  Dog.findByIdAndUpdate(dogId, { name, image, age, breed, hairType, chipId, sex, size, weight,
-    description, diet, medicalRecord }, { new: true })
+  Dog.findByIdAndUpdate(dogId, { name, image, age, breed, hairType, chipId, 
+    sex, size, weight, description, diet, medicalRecord }, { new: true })
     .then(() => {
       res.json({ message: "Your dog info was Updated!" });
     })
