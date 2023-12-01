@@ -15,7 +15,7 @@ const cors = require("cors");
 
 const mongoose = require('mongoose');
 
-const FRONTEND_URL = process.env.ORIGIN || "http://localhost:3000";
+const FRONTEND_URL = process.env.ORIGIN || "http://localhost:3001";
 
 // Middleware configuration
 module.exports = (app) => {
@@ -28,7 +28,19 @@ module.exports = (app) => {
     cors({
       origin: [FRONTEND_URL],
     })
-  );
+  )
+
+  const MONGO_URI ="mongodb+srv://diasfilipe2000:Veritea0!@upet.r0fkbeh.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose
+  .connect(MONGO_URI)
+  .then((x) => {
+    const dbName = x.connections[0].name;
+    console.log(`Connected to Mongo! Database name: "${dbName}"`);
+  })
+  .catch((err) => {
+    console.error("Error connecting to mongo: ", err);
+  });
 
   // In development environment the app logs
   app.use(logger("dev"));
