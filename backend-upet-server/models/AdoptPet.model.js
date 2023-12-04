@@ -21,4 +21,4 @@ const adoptPetSchema = new Schema({
     associationName: {type: String, required: true},
 });
 
-module.exports = model("Cat", adoptPetSchema);
+module.exports = model("AdoptPet", adoptPetSchema);
