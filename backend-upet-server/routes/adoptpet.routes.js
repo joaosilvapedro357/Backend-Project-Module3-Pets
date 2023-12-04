@@ -15,7 +15,7 @@ router.post("/adoptedpet", (req, res) => {
   const { name, animal, image, age, breed, chipId, sex, size, weight,
     description, diet, medicalRecord, healthStatus, location, associationName } = req.body;
 
-  AdoptPet.create({name, animal, image, age, breed, chipId, sex, size, weight,
+  AdoptedPet.create({name, animal, image, age, breed, chipId, sex, size, weight,
     description, diet, medicalRecord, healthStatus, location, associationName })
     .then((response) => res.json(response))
     .catch((error) => res.json(error));
@@ -23,7 +23,7 @@ router.post("/adoptedpet", (req, res) => {
 
 // GET '/adoptedpets' - Reads all adopted pets
 router.get("/adoptedpets", (req, res) => {
-  AdoptPet.find()
+  AdoptedPet.find()
     .populate('owner')
     .then((allAdoptedPets) => res.json(allAdoptedPets))
     .catch((error) => res.json(error));
@@ -32,7 +32,7 @@ router.get("/adoptedpets", (req, res) => {
 // GET 'adoptedpets/:adoptedpetId' - Reads a specific adopted pet
 router.get("/adoptedpets/:adoptedpetId", (req, res) => {
   const { adoptedpetId } = req.params;
-  Dog.findById(adoptedpetId)
+  AdoptedPet.findById(adoptedpetId)
     .populate('owner')
     .then((adoptedPet) => res.json(adoptedPet))
     .catch((error) => res.json(error));
@@ -45,7 +45,7 @@ router.put("/adoptedpets/:adoptedpetId", (req, res) => {
   const { name, animal, image, age, breed, chipId, sex, size, weight,
     description, diet, medicalRecord, healthStatus, location, associationName } = req.body;
 
-  AdoptPet.findByIdAndUpdate(adoptedpetId, { name, animal, image, age, breed, 
+  AdoptedPet.findByIdAndUpdate(adoptedpetId, { name, animal, image, age, breed, 
     chipId, sex, size, weight, description, diet, medicalRecord, healthStatus, 
     location, associationName }, { new: true })
     .then(() => {
@@ -60,7 +60,7 @@ router.put("/adoptedpets/:adoptedpetId", (req, res) => {
 router.delete('/adoptedpets/:adoptedpetId', (req,res)=>{
     const {adoptedpetId} = req.params; 
 
-    AdoptPet.findByIdAndDelete(adoptedpetId)
+    AdoptedPet.findByIdAndDelete(adoptedpetId)
         .then(()=>{
             res.json({message: 'Your adopted pet was deleted.'});
         })

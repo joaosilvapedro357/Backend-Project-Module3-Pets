@@ -30,6 +30,9 @@ app.use('/api', catRoutes)
 const otherPetRoutes = require('./routes/otherPet.routes');
 app.use('/api', otherPetRoutes)
 
+const adoptPetRoutes = require("./routes/adoptpet.routes");
+app.use("/api", adoptPetRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
