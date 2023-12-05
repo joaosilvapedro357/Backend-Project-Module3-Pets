@@ -21,14 +21,8 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
-const dogRoutes = require('./routes/dog.routes');
-app.use('/api', dogRoutes)
-
-const catRoutes = require('./routes/cat.routes');
-app.use('/api', catRoutes)
-
-const otherPetRoutes = require('./routes/otherPet.routes');
-app.use('/api', otherPetRoutes)
+const petRoutes = require('./routes/pet.routes');
+app.use('/api', petRoutes)
 
 const adoptPetRoutes = require("./routes/adoptPet.routes");
 app.use("/api", adoptPetRoutes)
