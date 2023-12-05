@@ -12,7 +12,6 @@ const userSchema = new Schema(
     city: { type: String, required: false },
     address: { type: String, required: false },
     numberOfPets: { type: Number }
-    
   }
   /*{
     // this second object adds extra properties: `createdAt` and `updatedAt`
