@@ -2,7 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-/* Configure an Express Router for the Adopt Pet Routes */
+/* Configure an Express Router for the Pet for Adoption Routes */
 const router = express.Router();
 
 /* Require the AdoptPet Model */
@@ -10,8 +10,8 @@ const AdoptPet = require("../models/AdoptPet.model");
 
 /* ROUTES */
 
-// POST '/api/adoptpet' - Creates a new pet to adopt
-router.post("/adoptpet", (req, res) => {
+// POST '/api/petforadoption' - Creates a new pet for adoption
+router.post("/petforadoption", (req, res) => {
   const { name, animal, image, age, breed, chipId, sex, size, weight,
     description, diet, medicalRecord, healthStatus, location, associationName } = req.body;
 
@@ -21,31 +21,31 @@ router.post("/adoptpet", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// GET '/adoptpets' - Reads all pets to adopt
-router.get("/adoptpets", (req, res) => {
+// GET '/petsforadoption' - Reads all pets for adoption
+router.get("/petsforadoption", (req, res) => {
   AdoptPet.find()
-    //.populate('owner') Pets to adopt don't have a owner yet
-    .then((allPetsToAdopt) => res.json(allPetsToAdopt))
+    //.populate('owner') Pets for adoption don't have a owner yet
+    .then((allPetsForAdoption) => res.json(allPetsForAdoption))
     .catch((error) => res.json(error));
 });
 
-// GET 'adoptpets/:adoptpetId' - Reads a specific pet to adopt
-router.get("/adoptpets/:adoptpetId", (req, res) => {
-  const { adoptpetId } = req.params;
-  AdoptPet.findById(adoptpetId)
+// GET 'petsforadoption/:petId' - Reads a specific pet for adoption
+router.get("/petsforadoption/:petId", (req, res) => {
+  const { petId } = req.params;
+  AdoptPet.findById(petId)
     //.populate('owner') Pets to adopt don't have a owner yet
-    .then((petToAdopt) => res.json(petToAdopt))
+    .then((petForAdoption) => res.json(petForAdoption))
     .catch((error) => res.json(error));
 });
 
-// PUT '/adoptpets/:adoptpetId' - Updates a specific pet to adopt
-router.put("/adoptpets/:adoptpetId", (req, res) => {
+// PUT '/petsforadoption/:petId' - Updates a specific pet for adoption
+router.put("/petsforadoption/:petId", (req, res) => {
   // Object destructuring
-  const { adoptpetId } = req.params;
+  const { petId } = req.params;
   const { name, animal, image, age, breed, chipId, sex, size, weight,
     description, diet, medicalRecord, healthStatus, location, associationName } = req.body;
 
-  AdoptPet.findByIdAndUpdate(adoptpetId, { name, animal, image, age, breed, 
+  AdoptPet.findByIdAndUpdate(petId, { name, animal, image, age, breed, 
     chipId, sex, size, weight, description, diet, medicalRecord, healthStatus, 
     location, associationName }, { new: true })
     .then(() => {
@@ -56,11 +56,11 @@ router.put("/adoptpets/:adoptpetId", (req, res) => {
     });
 });
 
-// DELETE '/adoptpets/:adoptpetId' - Deletes a specific pet for adoption
-router.delete('/adoptpets/:adoptpetId', (req,res)=>{
-    const {adoptpetId} = req.params; 
+// DELETE '/petsforadoption/:petId' - Deletes a specific pet for adoption
+router.delete('/petsforadoption/:petId', (req,res)=>{
+    const {petId} = req.params; 
 
-    AdoptPet.findByIdAndDelete(adoptpetId)
+    AdoptPet.findByIdAndDelete(petId)
         .then(()=>{
             res.json({message: 'Your pet for adoption was deleted.'});
         })
