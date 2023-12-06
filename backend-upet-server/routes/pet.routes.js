@@ -10,26 +10,27 @@ const Pet = require("../models/Pet.model");
 
 /* ROUTES */
 
-// POST '/api/pet' - Creates a new Pet
-router.post("/pet", (req, res) => {
+// POST '/:userId/pet' - Creates a new Pet for the User
+router.post("/:userId/pet", (req, res) => {
+  const {userId} = req.params;
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
     description, diet, medicalRecord } = req.body;
 
   Pet.create({ name, image, age, breed, hairType, chipId, sex, size, weight,
-    description, diet, medicalRecord, owner:[]})
+    description, diet, medicalRecord, user: userId})
     .then((response) => res.json(response))
     .catch((error) => res.json(error));
 });
 
-// GET 'api/pets' - Reads all pets
-router.get("/pets", (req, res) => {
+// GET '/:userId/pets' - Reads all pets for the User
+router.get("/:userId/pets", (req, res) => {
   Pet.find()
     .populate('owner')
     .then((allPets) => res.json(allPets))
     .catch((error) => res.json(error));
 });
 
-// GET 'api/pets/:petId' - Reads a specific pet
+// GET '/pets/:petId' - Reads a specific pet
 router.get("/pets/:petId", (req, res) => {
   const { petId } = req.params;
   Pet.findById(petId)
@@ -38,7 +39,7 @@ router.get("/pets/:petId", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// PUT 'api/pets/:petId' - Updates a specific pet
+// PUT '/pets/:petId' - Updates a specific pet
 router.put("/pets/:petId", (req, res) => {
   // Object destructuring
   const { petId } = req.params;

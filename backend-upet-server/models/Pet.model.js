@@ -17,6 +17,7 @@ const petSchema = new Schema({ // Show required fields in front-end form with an
     diet: { type: String, required: true },
     medicalRecord: { type: String, required: true },
     owner: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    user: [{type: String}],
 });
 
 module.exports = model("Pet", petSchema);
