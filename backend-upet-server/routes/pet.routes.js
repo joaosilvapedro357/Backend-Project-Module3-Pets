@@ -14,7 +14,7 @@ const Pet = require("../models/Pet.model");
 router.post("/:userId/pet", (req, res) => {
   const {userId} = req.params;
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
-    description, diet, medicalRecord } = req.body;
+    description, diet, medicalRecord, user } = req.body;
 
   Pet.create({ name, image, age, breed, hairType, chipId, sex, size, weight,
     description, diet, medicalRecord, user: userId})
@@ -24,49 +24,50 @@ router.post("/:userId/pet", (req, res) => {
 
 // GET '/:userId/pets' - Reads all pets for the User
 router.get("/:userId/pets", (req, res) => {
-  Pet.find()
+  const {userId} = req.params;
+  Pet.find({user: userId})
     .populate('owner')
-    .then((allPets) => res.json(allPets))
+    .then((allPetsForUser) => res.json(allPetsForUser))
     .catch((error) => res.json(error));
 });
 
-// GET '/pets/:petId' - Reads a specific pet
-router.get("/pets/:petId", (req, res) => {
-  const { petId } = req.params;
-  Pet.findById(petId)
+// GET '/:userId/pets/:petId' - Reads a specific pet for the User
+router.get("/:userId/pets/:petId", (req, res) => {
+  const { userId } = req.params;
+  Pet.findById({user: userId})
     .populate("owner")
-    .then((pet) => res.json(pet))
+    .then((petForUser) => res.json(petForUser))
     .catch((error) => res.json(error));
 });
 
-// PUT '/pets/:petId' - Updates a specific pet
-router.put("/pets/:petId", (req, res) => {
+// PUT '/:userId/pets/:petId' - Updates a specific pet of the User
+router.put("/:userId/pets/:petId", (req, res) => {
   // Object destructuring
-  const { petId } = req.params;
+  const { userId } = req.params;
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
-    description, diet, medicalRecord } = req.body;
+    description, diet, medicalRecord, user} = req.body;
 
-  Pet.findByIdAndUpdate(petId, { name, image, age, breed, hairType, chipId, 
-    sex, size, weight, description, diet, medicalRecord }, { new: true })
+  Pet.findByIdAndUpdate({user: userId}, petId, { name, image, age, breed, hairType, chipId, 
+    sex, size, weight, description, diet, medicalRecord, user: userId }, { new: true })
     .then(() => {
-      res.json({ message: "Your pet info was Updated!" });
+      res.json({ message: "User's pet info was Updated!" });
     })
     .catch((error) => {
-      res.json({ message: "Failed to Update pet's info." });
+      res.json({ message: "Failed to Update User's pet info." });
     });
 });
 
-// DELETE 'pets/:petId' - Deletes a specific pet
-router.delete('/pets/:petId', (req,res)=>{
+// DELETE '/:userIdpets/:petId' - Deletes a specific pet of the User
+router.delete('/:userId/pets/:petId', (req,res)=>{
 
-    const {petId} = req.params; 
+    const {userId} = req.params; 
 
-    Pet.findByIdAndDelete(petId)
+    Pet.findByIdAndDelete({user: userId},petId)
         .then(()=>{
-            res.json({message: 'Your pet was deleted.'});
+            res.json({message: `User's pet was deleted.`});
         })
         .catch(()=>{
-            res.json({error: 'Failed to delete pet.'});
+            res.json({error: `Failed to delete User's pet.`});
         })
 })
 
