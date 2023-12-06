@@ -33,7 +33,7 @@ router.get("/pets", (req, res) => {
 router.get("/pets/:petId", (req, res) => {
   const { petId } = req.params;
   Pet.findById(petId)
-    .populate("User")
+    .populate("owner")
     .then((pet) => res.json(pet))
     .catch((error) => res.json(error));
 });
