@@ -24,7 +24,7 @@ app.use("/auth", authRoutes);
 const petRoutes = require('./routes/pet.routes');
 app.use('/api', petRoutes)
 
-const adoptPetRoutes = require("./routes/adoptPet.routes");
+const adoptPetRoutes = require("./routes/adoptpet.routes");
 app.use("/api", adoptPetRoutes)
 
 
