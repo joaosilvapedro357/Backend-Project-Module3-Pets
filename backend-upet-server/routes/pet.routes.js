@@ -17,7 +17,7 @@ router.post("/:userId/pet", (req, res) => {
     description, diet, medicalRecord } = req.body;
 
   Pet.create({ name, image, age, breed, hairType, chipId, sex, size, weight,
-    description, diet, medicalRecord, user: userId})
+    description, diet, medicalRecord, owner: userId})
     .then((response) => res.json(response))
     .catch((error) => res.json(error));
 });
