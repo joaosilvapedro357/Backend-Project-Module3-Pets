@@ -22,7 +22,7 @@ router.post("/:userId/pet", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// GET '/:userId/pets' - Reads all pets for the User
+// GET '/api/:userId/pets' - Reads all pets for the User
 router.get("/:userId/pets", (req, res) => {
   const {userId} = req.params;
   Pet.find({user: userId})
@@ -31,17 +31,17 @@ router.get("/:userId/pets", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// GET '/:userId/pets/:petId' - Reads a specific pet for the User
-router.get("/:userId/pets/:petId", (req, res) => {
-  const { userId } = req.params;
-  Pet.findById({user: userId})
+// GET '/api/pets/:petId' - Reads a specific pet for the User
+router.get("/pets/:petId", (req, res) => {
+  const { petId } = req.params;
+  Pet.findById(petId)
     .populate("owner")
     .then((petForUser) => res.json(petForUser))
     .catch((error) => res.json(error));
 });
 
 // PUT '/:userId/pets/:petId' - Updates a specific pet of the User
-router.put("/:userId/pets/:petId", (req, res) => {
+router.put("/pets/:petId", (req, res) => {
   // Object destructuring
   const { userId } = req.params;
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
@@ -58,7 +58,7 @@ router.put("/:userId/pets/:petId", (req, res) => {
 });
 
 // DELETE '/:userIdpets/:petId' - Deletes a specific pet of the User
-router.delete('/:userId/pets/:petId', (req,res)=>{
+router.delete('/pets/:petId', (req,res)=>{
 
     const {userId} = req.params; 
 
