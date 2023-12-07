@@ -25,7 +25,7 @@ router.post("/:userId/pet", (req, res) => {
 // GET '/api/:userId/pets' - Reads all pets for the User
 router.get("/:userId/pets", (req, res) => {
   const {userId} = req.params;
-  Pet.find({user: userId})
+  Pet.find({owner: userId})
     .populate('owner')
     .then((allPetsForUser) => res.json(allPetsForUser))
     .catch((error) => res.json(error));
