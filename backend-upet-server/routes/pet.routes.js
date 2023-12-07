@@ -14,7 +14,7 @@ const Pet = require("../models/Pet.model");
 router.post("/:userId/pet", (req, res) => {
   const {userId} = req.params;
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
-    description, diet, medicalRecord, user } = req.body;
+    description, diet, medicalRecord } = req.body;
 
   Pet.create({ name, image, age, breed, hairType, chipId, sex, size, weight,
     description, diet, medicalRecord, user: userId})
@@ -44,10 +44,11 @@ router.get("/:userId/pets/:petId", (req, res) => {
 router.put("/:userId/pets/:petId", (req, res) => {
   // Object destructuring
   const { userId } = req.params;
+  const { petId} = req.params;
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
     description, diet, medicalRecord, user} = req.body;
 
-  Pet.findByIdAndUpdate({user: userId}, petId, { name, image, age, breed, hairType, chipId, 
+  Pet.findByIdAndUpdate(petId, { name, image, age, breed, hairType, chipId, 
     sex, size, weight, description, diet, medicalRecord, user: userId }, { new: true })
     .then(() => {
       res.json({ message: "User's pet info was Updated!" });
@@ -61,8 +62,9 @@ router.put("/:userId/pets/:petId", (req, res) => {
 router.delete('/:userId/pets/:petId', (req,res)=>{
 
     const {userId} = req.params; 
+    const { petId} = req.params;
 
-    Pet.findByIdAndDelete({user: userId},petId)
+    Pet.findByIdAndDelete(petId)
         .then(()=>{
             res.json({message: `User's pet was deleted.`});
         })
