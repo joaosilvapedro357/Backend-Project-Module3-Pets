@@ -33,8 +33,8 @@ router.get("/:userId/pets", (req, res) => {
 
 // GET '/:userId/pets/:petId' - Reads a specific pet for the User
 router.get("/:userId/pets/:petId", (req, res) => {
-  const { userId } = req.params;
-  Pet.findById({user: userId})
+  const { userId, petId } = req.params;
+  Pet.findById(petId)
     .populate("owner")
     .then((petForUser) => res.json(petForUser))
     .catch((error) => res.json(error));
@@ -43,8 +43,7 @@ router.get("/:userId/pets/:petId", (req, res) => {
 // PUT '/:userId/pets/:petId' - Updates a specific pet of the User
 router.put("/:userId/pets/:petId", (req, res) => {
   // Object destructuring
-  const { userId } = req.params;
-  const { petId} = req.params;
+  const { userId, petId } = req.params;
   const { name, image, age, breed, hairType, chipId, sex, size, weight,
     description, diet, medicalRecord, user} = req.body;
 
@@ -61,8 +60,7 @@ router.put("/:userId/pets/:petId", (req, res) => {
 // DELETE '/:userIdpets/:petId' - Deletes a specific pet of the User
 router.delete('/:userId/pets/:petId', (req,res)=>{
 
-    const {userId} = req.params; 
-    const { petId} = req.params;
+    const {userId, petId} = req.params; 
 
     Pet.findByIdAndDelete(petId)
         .then(()=>{
