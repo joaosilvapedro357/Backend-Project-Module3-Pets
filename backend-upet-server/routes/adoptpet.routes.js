@@ -23,6 +23,7 @@ router.post("/petforadoption", (req, res) => {
 
 // GET '/petsforadoption' - Reads all pets for adoption
 router.get("/petsforadoption", (req, res) => {
+  console.log('Entrei');
   AdoptPet.find()
     //.populate('owner') Pets for adoption don't have a owner yet
     .then((allPetsForAdoption) => res.json(allPetsForAdoption))

@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 /* Configure an Express Router for the Pet Routes */
 const router = express.Router();
 
-/* Require the Pet Model */
+/* Require the User Model */
 const User = require("../models/User.model");
 
 
@@ -20,18 +20,18 @@ router.post("/user", (req, res) => {
     .catch((error) => res.json(error));
 });
 
-// GET '/users' - Reads all Users
-router.get("/users", (req, res) => {
-  User.find()
-    .then((allUsers) => res.json(allUsers))
-    .catch((error) => res.json(error));
-});
-
 // GET '/users/:userId' - Reads a specific User
 router.get("/users/:userId", (req, res) => {
   const { userId } = req.params;
   User.findById(userId)
-    .then((User) => res.json(User))
+    .then((user) => res.json(user))
+    .catch((error) => res.json(error));
+});
+
+// GET '/users' - Reads all Users
+router.get("/users", (req, res) => {
+  User.find()
+    .then((allUsers) => res.json(allUsers))
     .catch((error) => res.json(error));
 });
 

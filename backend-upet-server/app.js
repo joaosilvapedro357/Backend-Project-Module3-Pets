@@ -27,6 +27,9 @@ app.use('/api', petRoutes)
 const adoptPetRoutes = require("./routes/adoptpet.routes");
 app.use("/api", adoptPetRoutes)
 
+const userRoutes = require("./routes/user.routes");
+app.use(userRoutes)
+
 
 
 
