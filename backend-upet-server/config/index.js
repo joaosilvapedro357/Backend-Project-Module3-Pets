@@ -28,7 +28,7 @@ know that it should trust that setting.*/
   // controls a very specific header to pass headers from the frontend
   app.use(
     cors({
-      origin: [FRONTEND_URL, "http://localhost:5173"],
+      origin: [FRONTEND_URL, "http://localhost:5173", "https://u-pet.netlify.app/"],
     })
   )
 
